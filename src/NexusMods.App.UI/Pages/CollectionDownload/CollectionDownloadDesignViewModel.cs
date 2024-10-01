@@ -2,12 +2,25 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using NexusMods.Abstractions.Jobs;
 using NexusMods.Abstractions.NexusWebApi.Types;
+using NexusMods.App.UI.Pages.LibraryPage;
+using NexusMods.App.UI.Windows;
+using NexusMods.App.UI.WorkspaceSystem;
 using NexusMods.Paths;
 
 namespace NexusMods.App.UI.Pages.CollectionDownload;
 
-public class CollectionDownloadDesignViewModel : AViewModel<ICollectionDownloadViewModel>, ICollectionDownloadViewModel
+public class CollectionDownloadDesignViewModel : APageViewModel<ICollectionDownloadViewModel>, ICollectionDownloadViewModel
 {
+    public CollectionDownloadDesignViewModel(IWindowManager manager) : base(manager)
+    {
+    }
+    
+    public CollectionDownloadDesignViewModel() : base(new DesignWindowManager())
+    {
+    }
+
+
+
     public string Name => "Vanilla+ [Quality of Life]";
     public CollectionSlug Slug { get; } = CollectionSlug.From("tckf0m");
     public RevisionNumber RevisionNumber { get; } = RevisionNumber.From(6);
@@ -28,4 +41,6 @@ public class CollectionDownloadDesignViewModel : AViewModel<ICollectionDownloadV
     public Bitmap BackgroundImage { get; } = new(AssetLoader.Open(new Uri("avares://NexusMods.App.UI/Assets/DesignTime/header-background.webp")));
     
     public string CollectionStatusText { get; } = "0 of 9 mods downloaded";
+    public LibraryTreeDataGridAdapter RequiredModsAdapter => throw new NotSupportedException();
+    public LibraryTreeDataGridAdapter OptionalModsAdapter => throw new NotSupportedException();
 }

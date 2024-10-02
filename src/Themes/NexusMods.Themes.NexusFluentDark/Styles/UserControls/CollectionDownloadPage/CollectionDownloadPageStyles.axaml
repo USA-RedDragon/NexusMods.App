@@ -167,9 +167,11 @@
             <Style Selector="^ Border#ListHeaderRowBorder">
                 <Setter Property="panels:Flex.AlignSelf" Value="Stretch" />
                 <Setter Property="Background" Value="{StaticResource SurfaceLowBrush}" />
-                <Setter Property="Padding" Value="24" />
+                <Setter Property="Padding" Value="24, 12" />
                 <Setter Property="panels:Flex.Grow" Value="0" />
                 <Setter Property="panels:Flex.Shrink" Value="0" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="BorderBrush" Value="{StaticResource StrokeTranslucentWeakBrush}" />
 
                 <Style Selector="^ panels|FlexPanel#ListHeaderRow">
                     <Setter Property="JustifyContent" Value="FlexEnd" />
@@ -178,61 +180,105 @@
                 </Style>
             </Style>
 
-            <!-- expanders -->
-            <Style Selector="^ ScrollViewer#ExpandersScrollViewer">
-                <!-- <Setter Property="Background" Value="Bisque" /> -->
+            <!-- tabs -->
+
+            <Style Selector="^ TabControl">
+                <!-- right margin to stay left of the scrollbar -->
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="Padding" Value="0" />
                 <Setter Property="panels:Flex.AlignSelf" Value="Stretch" />
-                <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+                <Setter Property="Background" Value="{StaticResource SurfaceLowBrush}" />
 
-                <Style Selector="^ panels|FlexPanel#ExpandersFlexPanel">
-                    <Setter Property="Direction" Value="Column" />
+                <Style Selector="^ /template/ ItemsPresenter#PART_ItemsPresenter">
+                    <Setter Property="Margin" Value="0" />
+                </Style>
 
-                    <Style Selector="^ Expander">
-                        <!-- right margin to stay left of the scrollbar -->
-                        <Setter Property="Margin" Value="0,0, 16,0" />
+                <Style Selector="^ /template/ ContentPresenter#PART_SelectedContentHost">
+                    <Setter Property="BorderThickness" Value="0,1,0,0" />
+                    <Setter Property="BorderBrush" Value="{StaticResource StrokeTranslucentWeakBrush}" />
+                </Style>
+
+                <Style Selector="^[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
+                    <Setter Property="Margin" Value="12,0,0,0" />
+                </Style>
+
+                <!-- tab item headers text -->
+
+                <Style Selector="^ TabItem">
+
+                    <Setter Property="Margin" Value="0,12,0,0" />
+                    <Setter Property="Padding" Value="12,0,12,0" />
+
+                    <Style Selector="^[TabStripPlacement=Top] /template/ Border#PART_SelectedPipe">
+                        <Setter Property="Margin" Value="0" />
                         <Setter Property="CornerRadius" Value="0" />
-                        <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+
+                    <Style Selector="^ Panel">
+                        <Setter Property="VerticalAlignment" Value="Bottom" />
+                    </Style>
+
+                    <Style Selector="^[TabStripPlacement=Top] /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Margin" Value="0,0,0,12" />
+                    </Style>
+                    
+                    
+                    <!-- default\unselected tabs -->
+                    <Style Selector="^ panels|FlexPanel">
+                        <Setter Property="ColumnSpacing" Value="{StaticResource Spacing-2}" />
                         
-                        <!-- couldn't select this properly to override without the :down -->
-                        <Style Selector="^:down /template/ Border#ExpanderContent">
-                            <Setter Property="BorderThickness" Value="0"/>
+                        <Style Selector="^ > TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource NeutralSubduedBrush}" />
+                            <Setter Property="Theme" Value="{StaticResource BodyLGNormalTheme}" />
                         </Style>
                         
-                        <Style Selector="^ /template/ ToggleButton#ExpanderHeader">
-                            <!-- right margin to stay left of the scrollbar -->
+                        <Style Selector="^ Border">
+                            <Setter Property="Padding" Value="8,2, 7,2" />
+                            <Setter Property="CornerRadius" Value="{StaticResource Rounded-xl}" />
                             <Setter Property="Background" Value="{StaticResource SurfaceMidBrush}" />
-                            <Setter Property="BorderThickness" Value="0" />
-
-                            <Style Selector="^:pointerover /template/ Border#ToggleButtonBackground">
-                                <Setter Property="Background" Value="{StaticResource SurfaceHighBrush}" />
-                            </Style>
-
-                            <Style Selector="^:pressed /template/ Border#ToggleButtonBackground">
-                                <Setter Property="Background" Value="{StaticResource SurfaceLowBrush}" />
-                            </Style>
-                        </Style>
-
-                        <Style
-                            Selector="^ panels|FlexPanel#RequiredModsFlexPanel,^ panels|FlexPanel#OptionalModsFlexPanel">
-                            <Setter Property="ColumnSpacing" Value="{StaticResource Spacing-2}" />
-
-                            <Style Selector="^ > TextBlock">
-                                <Setter Property="Foreground" Value="{StaticResource NeutralStrongBrush}" />
-                                <Setter Property="Theme" Value="{StaticResource BodyLGNormalTheme}" />
-                            </Style>
-
-                            <Style Selector="^ > TextBlock#RequiredModsCount,^ > TextBlock#OptionalModsCount">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            
+                            <Style Selector="^ TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource NeutralSubduedBrush}" />
-                                <Setter Property="Theme" Value="{StaticResource BodyLGNormalTheme}" />
+                                <Setter Property="Theme" Value="{StaticResource BodySMNormalTheme}" />
                             </Style>
-                        </Style>
-
-                        <Style Selector="^ panels|FlexPanel#OptionalModsFlexPanel">
-                            <!-- <Setter Property="Background" Value="DarkSalmon" /> -->
                         </Style>
                     </Style>
+
+                    <!-- pointerover tabs -->
+                    <Style Selector="^:pointerover:not(:selected)">
+                        <Style Selector="^ panels|FlexPanel">
+                            <Style Selector="^ TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource NeutralModerateBrush}" />
+                            </Style>
+                        </Style>
+                        
+                        <Style Selector="^ /template/ Border#PART_SelectedPipe">
+                            <Setter Property="Background" Value="{StaticResource NeutralTranslucentSubduedBrush}" />
+                            <Setter Property="IsVisible" Value="True" />
+                        </Style>
+                    </Style>
+                    
+                    <!-- selected tabs -->
+                    <Style Selector="^:selected panels|FlexPanel">
+
+                        <Style Selector="^ > TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource NeutralStrongBrush}" />
+                        </Style>
+                        
+                        <Style Selector="^ Border">
+                            <Setter Property="Background" Value="{StaticResource SurfaceHighBrush}" />
+                            
+                            <Style Selector="^ TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource NeutralModerateBrush}" />
+                            </Style>
+                        </Style>
+                    </Style>
+
                 </Style>
+
             </Style>
 
         </Style>

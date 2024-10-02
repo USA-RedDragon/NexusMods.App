@@ -30,7 +30,7 @@ public class CollectionDownloadDesignViewModel : APageViewModel<ICollectionDownl
         "Aims to improves vanilla gameplay while adding minimal additional content. Aims to improves vanilla gameplay while adding minimal additional content. Aims to improves vanilla gameplay while adding minimal additional content. Aims to improves vanilla gameplay while adding minimal additional content.";
 
     public int ModCount => 9;
-    public int RequiredModCount => 7;
+    public int RequiredModCount => 123;
     public int OptionalModCount => 2;
     public int EndorsementCount => 248;
     public int DownloadCount => 35_123;
